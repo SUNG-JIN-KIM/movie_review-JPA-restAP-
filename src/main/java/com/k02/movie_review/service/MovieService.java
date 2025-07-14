@@ -28,4 +28,17 @@ public class MovieService {
     public Movie create(Movie movie){
         return movieRepository.save(movie);
     }
+
+    public  Movie update(Long id, Movie movie){
+        Movie exisMovie = getById(id);
+        exisMovie.setTitle(movie.getTitle());
+        exisMovie.setReleaseYear(movie.getReleaseYear());
+
+        return movieRepository.save(exisMovie);
+    }
+
+    public void delete(Long id) {
+        movieRepository.deleteById(id);
+    }
+
 }

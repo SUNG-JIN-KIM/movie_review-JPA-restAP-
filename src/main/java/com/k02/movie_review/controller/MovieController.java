@@ -50,4 +50,21 @@ public class MovieController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdMovie);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Movie> update(@PathVariable Long id, @Valid @RequestBody MovieDto movieDto){
+        Movie movie = new Movie();
+
+        movie.setTitle(movieDto.getTitle());
+        movie.setReleaseYear(movieDto.getReleaseYear());
+
+        Movie updated = movieService.update(id, movie);
+
+        return ResponseEntity.ok(updated);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        movieService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
